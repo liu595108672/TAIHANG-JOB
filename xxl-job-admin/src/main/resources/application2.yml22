@@ -1,0 +1,41 @@
+# Tomcat
+server:
+  port: ${server_port:9713}
+
+# Spring
+spring:
+  application:
+    # ????
+    name: taihang-job
+  profiles:
+    # ????
+    active: dev
+  mvc:
+    format:
+      date: yyyy-MM-dd HH:mm:ss
+      date-time: yyyy-MM-dd HH:mm:ss
+      servlet:
+        load-on-startup: 0
+      static-locations: classpath:/static/
+  cloud:
+    nacos:
+      discovery:
+        # ??????
+        server-addr: ${nacos_addr:192.168.30.90:8848}
+        # ????
+        namespace: ${nacos_namespace:ywtg}
+        group: DEFAULT_GROUP
+      config:
+#        import-check:
+#          enabled: false
+        # ??????
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        group: ${spring.cloud.nacos.discovery.group}
+        # ??????
+        file-extension: yml
+
+mybatis:
+  configuration:
+    #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
